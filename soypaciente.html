@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>SOY PACIENTE</title>
+		<link rel="stylesheet" href="soypaciente.css">	
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+	</head>
+	<body>
+		<nav class="navbar">
+			<a href="HTML_pbl6.html#" class="logo-link">
+				<img class="brand" src="Imagenes/LogoSCAN4.png" alt="Logo SCAN4" />
+			</a>
+			<a class="navbar_item" href="HTML_pbl6.html#scan4-section">Inicio</a>
+            <a class="navbar_item" href="HTML_pbl6.html#sobre-nosotros">Sobre nosotros</a>
+            <a class="navbar_item" href="HTML_pbl6.html#Contacto">Contacto</a>
+			<div class="navbar_item dropdown navbar_item-push-right">
+				<span class="dropbtn">Usuario</span>
+				<div class="dropdown-content">
+					<a href="iniciarsesion.html">Iniciar sesión</a>
+				</div>
+			</div>
+        </nav>
+		<div class="patient-container">
+			<div class="patient-header">
+				<h1>Área de Paciente</h1>
+				<div class="patient-info" id="patientInfo"></div>
+			</div>
+			<div class="patient-sections">
+				<section class="patient-section" id="medicalInfo">
+					<h2><i class="fas fa-user-md"></i> Información del paciente</h2>
+					<div class="info-grid" id="medicalData"></div>
+				</section>
+				<section class="patient-section" id="testData">
+					<h2><i class="fas fa-vials"></i> Datos de la prueba</h2>
+					<div class="info-grid" id="testDates"></div>
+				</section>
+				<section class="patient-section" id="testResult">
+					<h2><i class="fas fa-notes-medical"></i> Resultado de la prueba</h2>
+					<div class="info-grid" id="testResultData"></div>
+				</section>
+			</div>
+		</div>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+			  const userData = JSON.parse(sessionStorage.getItem('currentUser'));
+			  if (!userData || userData.tipo !== 'pa') {
+				window.location.href = 'iniciarsesion.html';
+				return;
+			  }
+			  fetch('XML_pbl6.xml')
+				.then(response => response.text())
+				.then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+				.then(xml => {
+				  const dni = userData.dni;
+				  const patientNode = Array.from(xml.querySelectorAll('Patient')).find(p => p.getAttribute('idPa') === dni);
+				  if (patientNode) displayPatientData(userData, patientNode);
+				})
+				.catch(err => console.error('Error cargando XML:', err));
+			  function displayPatientData(user, node) {
+				document.getElementById('patientInfo').innerHTML = `
+				  <div class="patient-card">
+					<div class="patient-avatar"><i class="fas fa-user-circle"></i></div>
+					<div class="patient-details">
+					  <h3>${user.nombre}</h3>
+					  <p><strong>DNI:</strong> ${user.dni}</p>
+					</div>
+				  </div>`;
+				const age = node.querySelector('Age')?.textContent || 'No especificado';
+				const height = node.querySelector('Height')?.textContent || 'No especificado';
+				const weight = node.querySelector('Weight')?.textContent || 'No especificado';
+				document.getElementById('medicalData').innerHTML = `
+				  <div class="info-item"><h3>Edad</h3><p>${age} años</p></div>
+				  <div class="info-item"><h3>Altura</h3><p>${height} cm</p></div>
+				  <div class="info-item"><h3>Peso</h3><p>${weight} kg</p></div>
+				  <div class="info-item"><h3>IMC</h3><p>${calculateBMI(height, weight)}</p></div>
+				`;
+				const testDate = node.querySelector('TestDate')?.textContent || '-';
+				const reportDate = node.querySelector('ReportDate')?.textContent || '-';
+				document.getElementById('testDates').innerHTML = `
+				  <div class="info-item"><h3>Fecha de la prueba</h3><p>${testDate}</p></div>
+				  <div class="info-item"><h3>Fecha del informe</h3><p>${reportDate}</p></div>
+				`;
+				const procedure = node.querySelector('Procedure')?.textContent || '-';
+				const hasMalaria = node.querySelector('HasMalaria')?.textContent || '-';
+				const parasite = node.querySelector('ParasiteType')?.textContent || '-';
+				const treatment = node.querySelector('Treatment')?.textContent || '-';
+				document.getElementById('testResultData').innerHTML = `
+				  <div class="info-item"><h3>Procedimiento</h3><p>${procedure}</p></div>
+				  <div class="info-item"><h3>Conclusión</h3><p>${hasMalaria}</p></div>
+				  <div class="info-item"><h3>Tipo de parásito</h3><p>${parasite}</p></div>
+				  <div class="info-item"><h3>Tratamiento</h3><p>${treatment}</p></div>
+				`;
+			  }
+			  function calculateBMI(height, weight) {
+				if (height === 'No especificado' || weight === 'No especificado') return 'No calculable';
+				const h = parseFloat(height) / 100;
+				const w = parseFloat(weight);
+				const bmi = (w / (h * h)).toFixed(1);
+				let category = '';
+				if (bmi < 18.5) category = '(Bajo peso)';
+				else if (bmi < 25) category = '(Normal)';
+				else if (bmi < 30) category = '(Sobrepeso)';
+				else category = '(Obesidad)';
+				return `${bmi} ${category}`;
+			  }
+			});
+		</script>
+		<footer class="site-footer">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Contacto</h3>
+					<ul>
+						<li><i class="fas fa-envelope"></i> scan4@gmail.com</li>
+						<li><i class="fas fa-phone"></i> +34 121 212 121</li>
+						<li><i class="fas fa-map-marker-alt"></i> c/Matsaria, 32<br>20600 Eibar, Guipuzcoa, España</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Enlaces rápidos</h3>
+					<ul>
+						<li><a href="#scan4-section">Inicio</a></li>
+						<li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+						<li><a href="#Contacto">Contacto</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Legal</h3>
+					<ul>
+						<li><a>Política de privacidad</a></li>
+						<li><a>Términos de uso</a></li>
+						<li><a>Aviso legal</a></li>
+						<li><a>Cookies</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Síguenos</h3>
+					<div class="social-icons">
+						<a href="https://x.com/?lang=es"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin"></i></a>
+						<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+						<a href="https://www.youtube.com/?app=desktop&hl=es"><i class="fab fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<p>© 2025 SCAN4 | Todos los derechos reservados</p>
+			</div>
+		</footer>
+		<button id="scrollTopBtn" title="Ir arriba">
+		  &#8679;
+		</button>
+		<script>
+		  const scrollBtn = document.getElementById('scrollTopBtn');
+		  scrollBtn.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		  });
+		</script>
+	</body> 
+</html>
+
+
