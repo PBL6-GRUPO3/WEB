@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>INICIAR SESIÓN</title>
+		<link rel="stylesheet" href="iniciarsesion.css">	
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar">
+			<a href="HTML_pbl6.html#" class="logo-link">
+				<img class="brand" src="Imagenes/LogoSCAN4.png" alt="Logo SCAN4" />
+			</a>
+			<a class="navbar_item" href="HTML_pbl6.html#scan4-section">Inicio</a>
+            <a class="navbar_item" href="HTML_pbl6.html#sobre-nosotros">Sobre nosotros</a>
+            <a class="navbar_item" href="HTML_pbl6.html#Contacto">Contacto</a>
+			<div class="navbar_item dropdown navbar_item-push-right">
+				<span class="dropbtn">Usuario</span>
+				<div class="dropdown-content">
+					<a href="iniciarsesion.html">Iniciar sesión</a>
+				</div>
+			</div>
+        </nav>
+		<div class="main-content">
+			<div class="container">
+				<h1>Iniciar Sesión</h1>
+				<form id="loginForm" class="login-form">
+					<label for="dni">DNI:</label>
+					<input
+						class="input-field"
+						type="text"
+						id="dni"
+						required
+						placeholder="Ej: 72854936K"
+						pattern="[0-9]{8}[A-Za-z]"
+					/>
+					<label for="password">Contraseña:</label>
+					<input
+						class="input-field"
+						type="password"
+						id="password"
+						required
+						placeholder="Contraseña"
+					/>
+					<button class="btn" type="submit">Iniciar sesión</button>
+				</form>
+				<div id="message" class="message"></div>
+			</div>
+		</div>
+		<footer class="site-footer">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Contacto</h3>
+					<ul>
+						<li><i class="fas fa-envelope"></i> scan4@gmail.com</li>
+						<li><i class="fas fa-phone"></i> +34 121 212 121</li>
+						<li><i class="fas fa-map-marker-alt"></i> c/Matsaria, 32<br>20600 Eibar, Guipuzcoa, España</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Enlaces rápidos</h3>
+					<ul>
+						<li><a href="#scan4-section">Inicio</a></li>
+						<li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+						<li><a href="#Contacto">Contacto</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Legal</h3>
+					<ul>
+						<li><a>Política de privacidad</a></li>
+						<li><a>Términos de uso</a></li>
+						<li><a>Aviso legal</a></li>
+						<li><a>Cookies</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Síguenos</h3>
+					<div class="social-icons">
+						<a href="https://x.com/?lang=es"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin"></i></a>
+						<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+						<a href="https://www.youtube.com/?app=desktop&hl=es"><i class="fab fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<p>© 2025 SCAN4 | Todos los derechos reservados</p>
+			</div>
+		</footer>
+		<script>
+			async function cargarXML() {
+			  try {
+				const respuesta = await fetch('XML_pbl6.xml');
+				if (!respuesta.ok) throw new Error('No se pudo cargar el XML');
+				const texto = await respuesta.text();
+				const parser = new DOMParser();
+				const xmlDoc = parser.parseFromString(texto, "application/xml");
+				return xmlDoc;
+			  } catch (e) {
+				mostrarMensaje('Error al cargar datos. ' + e.message);
+				throw e;
+			  }
+			}
+			function mostrarMensaje(msg, color = 'red') {
+			  const div = document.getElementById('message');
+			  div.textContent = msg;
+			  div.style.color = color;
+			}
+			function buscarUsuario(xmlDoc, dni, password) {
+			  const patients = Array.from(xmlDoc.getElementsByTagName('Patient'));
+			  for (const p of patients) {
+				const id = p.getAttribute('idPa');
+				const pass = p.querySelector('PasswordPa')?.textContent || '';
+				if (id.toUpperCase() === dni.toUpperCase() && pass === password) {
+				  const name = p.querySelector('NamePa')?.textContent || '';
+				  return { tipo: 'pa', nombre: name, dni: id };
+				}
+			  }
+			  const professionals = Array.from(xmlDoc.getElementsByTagName('Professional'));
+			  for (const pr of professionals) {
+				const id = pr.getAttribute('idPr');
+				const pass = pr.querySelector('PasswordPr')?.textContent || '';
+				if (id.toUpperCase() === dni.toUpperCase() && pass === password) {
+				  const name = pr.querySelector('NamePr')?.textContent || '';
+				  return { tipo: 'pr', nombre: name, dni: id };
+				}
+			  }
+			  return null;
+			}
+			document.getElementById('loginForm').addEventListener('submit', async e => {
+			  e.preventDefault();
+			  mostrarMensaje('');
+			  const dni = document.getElementById('dni').value.trim();
+			  const password = document.getElementById('password').value.trim();
+
+			  if (!/^[0-9]{8}[A-Za-z]$/.test(dni)) {
+				mostrarMensaje('Formato de DNI incorrecto');
+				return;
+			  }
+			  if (password.length === 0) {
+				mostrarMensaje('Introduce una contraseña');
+				return;
+			  }
+			  try {
+				const xmlDoc = await cargarXML();
+				const usuario = buscarUsuario(xmlDoc, dni, password);
+				if (!usuario) {
+				  mostrarMensaje('DNI o contraseña incorrectos');
+				  return;
+				}
+				sessionStorage.setItem('currentUser', JSON.stringify(usuario));
+				mostrarMensaje('Inicio de sesión correcto, redirigiendo...', 'green');
+				setTimeout(() => {
+				  if (usuario.tipo === 'pa') {
+					window.location.href = 'soypaciente.html';
+				  } else {
+					window.location.href = 'soyprofesional.html';
+				  }
+				}, 1500);
+			  } catch (err) {
+				console.error(err);
+				mostrarMensaje('Error al procesar la solicitud: ' + err.message);
+			  }
+			});
+		</script>
+		<button id="scrollTopBtn" title="Ir arriba">&#8679;</button>
+		<script>
+		  const scrollBtn = document.getElementById('scrollTopBtn');
+		  scrollBtn.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		  });
+		</script>
+	</body> 
+</html>
