@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="PBL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Patients">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Patient" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="InformaciónPaciente">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="NamePa" type="xs:string"/>
+													<xs:element name="PasswordPa" type="xs:string"/>
+													<xs:element name="Age" type="xs:integer"/>
+													<xs:element name="Height" type="xs:integer"/>
+													<xs:element name="Weight" type="xs:integer"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="DatosPrueba">
+											<xs:complexType>
+												<xs:sequence>
+												  <xs:element name="TestDate" type="xs:date"/>
+												  <xs:element name="ReportDate" type="xs:date"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Imagen" type="xs:string"/>
+										<xs:element name="ResultadosPrueba">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Procedure" type="xs:string"/>
+													<xs:element name="Diagnosis">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="HasMalaria" type="xs:string"/>
+																<xs:element name="ParasiteType" type="xs:string"/>
+																<xs:element name="Treatment" type="xs:string"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="idPa">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:pattern value="[0-9]{8}[A-Z]{1}"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Professionals">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Professional" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="InformaciónProfesional">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="NamePr" type="xs:string"/>
+													<xs:element name="PasswordPr" type="xs:string"/>
+													<xs:element name="Specialty" type="xs:string"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="idPr">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:pattern value="[0-9]{8}[A-Z]{1}"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
