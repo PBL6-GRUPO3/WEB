@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>SCAN4MALARIA</title>
+		<link rel="stylesheet" href="scan4malaria.css">	
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+	</head>
+	<body>
+		<nav class="navbar">
+			<a href="HTML_pbl6.html#" class="logo-link">
+				<img class="brand" src="Imagenes/LogoSCAN4.png" alt="Logo SCAN4" />
+			</a>
+			<a class="navbar_item" href="HTML_pbl6.html#scan4-section">Inicio</a>
+            <a class="navbar_item" href="HTML_pbl6.html#sobre-nosotros">Sobre nosotros</a>
+            <a class="navbar_item" href="HTML_pbl6.html#Contacto">Contacto</a>
+			<div class="navbar_item dropdown navbar_item-push-right">
+				<span class="dropbtn">Usuario</span>
+				<div class="dropdown-content">
+					<a href="iniciarsesion.html">Iniciar sesión</a>
+				</div>
+			</div>
+        </nav>
+		<div class="carousel-container">
+		  <div class="carousel-content">
+			<video autoplay muted loop class="carousel-video">
+				<source src="Video/Malaria.mp4" type="video/mp4">
+			</video>
+			<div class="slides-container">
+				<div class="carousel-slide active" id="slide1">
+					<h2>Introducción</h2>
+					<p>La malaria sigue siendo una de las principales enfermedades infecciosas que afecta a los países subdesarrollados, sobre todo en regiones de África. Según la Organización Mundial de la Salud (OMS), millones de personas se ven afectadas cada año, con una alta tasa de mortalidad en niños menores de cinco años y mujeres embarazadas. A pesar de los avances en su control, un diagnóstico precoz y preciso sigue siendo un gran reto.</p>
+				</div>
+				<div class="carousel-slide" id="slide2">
+					<h2>¿Qué es la malaria?</h2>
+					<p>La malaria es una enfermedad infecciosa causada por parásitos (protozoo) del género <em>Plasmodium</em>, los cuales se transmiten al ser humano a través de la picadura de mosquitos infectados del género <em>Anopheles</em>.</p>
+					<img src="Imagenes/Malariafoto.jpg" alt="Malaria mosquito" class="slide-image">
+				</div>
+				<div class="carousel-slide" id="slide3">
+					<h2>Ghana</h2>
+					<p>Ghana es uno de los países más afectados por la malaria dentro del grupo de los 11 países identificados por la iniciativa High Burden to High Impact (HBHI) de la OMS. Es por eso que este país representa un punto clave para la implementación de soluciones innovadoras como SCAN4Malaria.</p>
+					<img src="Imagenes/Ghana.png" alt="Ghana" class="slide-image">
+				</div>
+			</div>
+			<div class="carousel-nav">
+				<button onclick="showSlide(1)">Introducción</button>
+				<button onclick="showSlide(2)">¿Qué es la malaria?</button>
+				<button onclick="showSlide(3)">Ghana</button>
+			</div>
+		  </div>
+		</div>
+		<script>
+			function showSlide(n) {
+			  const slides = document.querySelectorAll('.carousel-slide');
+			  slides.forEach((slide, index) => {
+			    slide.classList.remove('active');
+			    if (index === n - 1) {
+			      slide.classList.add('active');
+			    }
+			  });
+			}
+		</script>
+		<section class="product-section">
+			<div class="product-container">
+				<div class="product-images">
+					<div class="main-image">
+						<img src="Imagenes/Mscan4.png" alt="Vista del producto" id="mainImg">
+					</div>
+					<div class="image-thumbs">
+						<img src="Imagenes/SCAN4MALARIA1.png" alt="Vista 1" onclick="showImage(this)">
+						<img src="Imagenes/SCAN4MALARIA2.png" alt="Vista 2" onclick="showImage(this)">
+						<img src="Imagenes/SCAN4MALARIA3.png" alt="Vista 3" onclick="showImage(this)">
+						<img src="Imagenes/SCAN4MALARIA4.png" alt="Vista 4" onclick="showImage(this)">
+						<img src="Imagenes/SCAN4MALARIA5.png" alt="Vista 5" onclick="showImage(this)">
+						<img src="Imagenes/SCAN4MALARIA6.png" alt="Vista 6" onclick="showImage(this)">
+					</div>
+				</div>
+				<div class="product-info">
+					<h2>SCAN4MALARIA</h2>
+					<p class="tagline">🔬 Diagnóstico inteligente de malaria en segundos</p>
+					<p class="description">
+						Nuestro software avanzado utiliza inteligencia artificial para detectar con precisión parásitos de la malaria en muestras de sangre.
+					</p>
+					<ul class="features">
+						<li>✅ Fácil de usar, sin conocimientos técnicos</li>
+						<li>✅ Resultados rápidos y confiables</li>
+						<li>✅ Compatible con cualquier tipo de hardware</li>
+					</ul>
+					<a href="#purchase-form" class="producto-button">Comprar ahora</a>
+					<a href="Etiqueta.html" class="enlace-sin-estilo">
+						<img src="Imagenes/Info.png" alt="Etiqueta" style="height:45px; vertical-align:middle; margin-left:45px;"/>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section id="purchase-form" class="purchase-form">
+			<h3>Compra tu licencia</h3>
+			<p class="price">💻 Precio por licencia: <strong>200000 €</strong></p>
+			<form id="compraForm" method="post">
+				<div class="form-group">
+					<label for="nombre">Nombre completo</label>
+					<input type="text" id="nombre" name="nombre" required>
+				</div>
+				<div class="form-group">
+					<label for="dni">DNI</label>
+					<input type="text" id="dni" name="dni" required pattern="[0-9]{8}[A-Za-z]">
+				</div>
+				<div class="form-group">
+					<label for="email">Correo electrónico</label>
+					<input type="email" id="email" name="email" required>
+				</div>
+				<div class="form-group">
+					<label for="cantidad">Cantidad de licencias</label>
+					<input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
+				</div>
+				<div class="form-total">
+					Total: <span id="total">200000 €</span>
+				</div>
+				<input type="submit" value="Comprar ahora">
+			</form>
+		</section>
+		<div id="confirmModal" class="modal">
+			<div class="modal-content">
+				<span class="close-btn">&times;</span>
+				<h2>¡Gracias por tu compra!</h2>
+				<p>Tu licencia ha sido procesada correctamente.</p>
+				<div class="download-section">
+				  <h3>Descarga la aplicación</h3>
+				  <a href="#" class="download-btn" id="downloadBtn">
+					<i class="fas fa-download"></i> Descargar ahora
+				  </a>
+				</div>
+			</div>
+		</div>
+		<script>
+		  function showImage(thumb) {
+			const mainImg = document.getElementById('mainImg');
+			mainImg.src = thumb.src;
+
+			document.querySelectorAll('.image-thumbs img').forEach(img =>
+			  img.classList.remove('selected')
+			);
+			thumb.classList.add('selected');
+		  }
+		  const cantidadInput = document.getElementById('cantidad');
+		  const totalSpan = document.getElementById('total');
+		  const precioUnitario = 200000;
+		  function actualizarTotal() {
+			let cantidad = parseInt(cantidadInput.value);
+			if (isNaN(cantidad) || cantidad < 1) cantidad = 1;
+			const total = (cantidad * precioUnitario).toFixed(2);
+			totalSpan.textContent = `${total} €`;
+		  }
+		  cantidadInput.addEventListener('input', actualizarTotal);
+		  document.addEventListener("DOMContentLoaded", () => {
+			actualizarTotal();
+			document.querySelector('.image-thumbs img.selected').classList.add('selected');
+		  });
+		</script>
+		<script>
+			const form = document.getElementById('compraForm');
+			const modal = document.getElementById('confirmModal');
+			const closeBtn = document.querySelector('.close-btn');
+			const downloadBtn = document.getElementById('downloadBtn');
+			form.addEventListener('submit', function (e) {
+			  e.preventDefault(); 
+			  modal.style.display = 'block';
+			});
+			closeBtn.addEventListener('click', () => {
+			  modal.style.display = 'none';
+			});
+			window.addEventListener('click', function(event) {
+			  if (event.target == modal) {
+				modal.style.display = 'none';
+			  }
+			});
+		</script>
+		<footer class="site-footer">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Contacto</h3>
+					<ul>
+						<li><i class="fas fa-envelope"></i> scan4@gmail.com</li>
+						<li><i class="fas fa-phone"></i> +34 121 212 121</li>
+						<li><i class="fas fa-map-marker-alt"></i> c/Matsaria, 32<br>20600 Eibar, Guipuzcoa, España</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Enlaces rápidos</h3>
+					<ul>
+						<li><a href="#scan4-section">Inicio</a></li>
+						<li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+						<li><a href="#Contacto">Contacto</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Legal</h3>
+					<ul>
+						<li><a>Política de privacidad</a></li>
+						<li><a>Términos de uso</a></li>
+						<li><a>Aviso legal</a></li>
+						<li><a>Cookies</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Síguenos</h3>
+					<div class="social-icons">
+						<a href="https://x.com/?lang=es"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin"></i></a>
+						<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+						<a href="https://www.youtube.com/?app=desktop&hl=es"><i class="fab fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<p>© 2025 SCAN4 | Todos los derechos reservados</p>
+			</div>
+		</footer>
+		<button id="scrollTopBtn" title="Ir arriba">
+		  &#8679;
+		</button>
+		<script>
+		  const scrollBtn = document.getElementById('scrollTopBtn');
+		  scrollBtn.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		  });
+		</script>
+	</body> 
+</html>
+
+ 
