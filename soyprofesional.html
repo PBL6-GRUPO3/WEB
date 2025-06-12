@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>SOY PROFESIONAL</title>
+		<link rel="stylesheet" href="soyprofesional.css">	
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar">
+			<a href="HTML_pbl6.html#" class="logo-link">
+				<img class="brand" src="Imagenes/LogoSCAN4.png" alt="Logo SCAN4" />
+			</a>
+			<a class="navbar_item" href="HTML_pbl6.html#scan4-section">Inicio</a>
+            <a class="navbar_item" href="HTML_pbl6.html#sobre-nosotros">Sobre nosotros</a>
+            <a class="navbar_item" href="HTML_pbl6.html#Contacto">Contacto</a>
+			<div class="navbar_item dropdown navbar_item-push-right">
+				<span class="dropbtn">Usuario</span>
+				<div class="dropdown-content">
+					<a href="iniciarsesion.html">Iniciar sesión</a>
+				</div>
+			</div>
+        </nav>
+		<div class="page-wrapper">
+			<main class="container">
+				<h1>Panel Profesional</h1>
+				<div class="search-section">
+				  <h2>Buscar Paciente</h2>
+				  <div class="search-container">
+					<input type="text" id="patientSearch" placeholder="Ingrese DNI del paciente...">
+					<button id="searchBtn">Buscar</button>
+					<div id="searchResults" class="dropdown-results"></div>
+				  </div>
+				</div>
+				<div id="patientData" class="patient-data-section">
+				</div>
+			</main>
+		</div>
+		<button id="scrollTopBtn" title="Ir arriba">&#8679;</button>
+		<script>
+			const scrollBtn = document.getElementById('scrollTopBtn');
+			scrollBtn.addEventListener('click', () => {
+			  window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+			document.addEventListener('DOMContentLoaded', function() {
+			  let patientsData = [];
+			  const searchInput = document.getElementById('patientSearch');
+			  const searchResults = document.getElementById('searchResults');
+			  const searchBtn = document.getElementById('searchBtn');
+			  const patientDataSection = document.getElementById('patientData');
+			  async function loadPatientData() {
+				try {
+				  const response = await fetch('XML_pbl6.xml');
+				  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+				  const xmlString = await response.text();
+				  const parser = new DOMParser();
+				  const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+				  if (xmlDoc.getElementsByTagName("parsererror").length > 0) throw new Error('Error en el formato XML');
+				  const patients = xmlDoc.getElementsByTagName("Patient");
+				  patientsData = Array.from(patients).map(patient => ({
+					id: patient.getAttribute('idPa'),
+					name: patient.getElementsByTagName("NamePa")[0].textContent,
+					age: patient.getElementsByTagName("Age")[0].textContent,
+					height: patient.getElementsByTagName("Height")[0].textContent,
+					weight: patient.getElementsByTagName("Weight")[0].textContent,
+					testDate: patient.getElementsByTagName("TestDate")[0].textContent,
+					reportDate: patient.getElementsByTagName("ReportDate")[0].textContent,
+					image: patient.getElementsByTagName("Imagen")[0].textContent,
+					procedure: patient.getElementsByTagName("Procedure")[0].textContent,
+					hasMalaria: patient.getElementsByTagName("HasMalaria")[0].textContent,
+					parasiteType: patient.getElementsByTagName("ParasiteType")[0].textContent,
+					treatment: patient.getElementsByTagName("Treatment")[0].textContent
+				  }));
+				  return true;
+				} catch (error) {
+				  console.error('Error cargando XML:', error);
+				  alert('Se cargaron datos de ejemplo. Error: ' + error.message);
+				  return false;
+				}
+			  }
+			  function displayPatientData(patient) {
+				  patientDataSection.innerHTML = `
+					<h2>${patient.name}</h2>
+					<!-- Tabla: Datos del Paciente -->
+					<table class="patient-table">
+					  <caption><strong>Datos del Paciente</strong></caption>
+					  <tr>
+						<th>Nombre</th>
+						<td>${patient.name}</td>
+					  </tr>
+					  <tr>
+						<th>DNI</th>
+						<td>${patient.id}</td>
+					  </tr>
+					  <tr>
+						<th>Edad</th>
+						<td>${patient.age} años</td>
+					  </tr>
+					  <tr>
+						<th>Altura</th>
+						<td>${patient.height} cm</td>
+					  </tr>
+					  <tr>
+						<th>Peso</th>
+						<td>${patient.weight} kg</td>
+					  </tr>
+					</table>
+					<!-- Tabla: Datos de la Prueba -->
+					<table class="patient-table">
+					  <caption><strong>Datos de la Prueba</strong></caption>
+					  <tr>
+						<th>Fecha de Prueba</th>
+						<td>${patient.testDate}</td>
+					  </tr>
+					  <tr>
+						<th>Fecha del Informe</th>
+						<td>${patient.reportDate}</td>
+					  </tr>
+					  <tr>
+						<th>Imagen</th>
+						<td><img src="${patient.image}" alt="Imagen de ${patient.name}" style="max-width:200px; height:auto;"/></td>
+					  </tr>
+					</table>
+					<!-- Tabla: Resultados de la Prueba -->
+					<table class="patient-table">
+					  <caption><strong>Resultados de la Prueba</strong></caption>
+					  <tr>
+						<th>Procedimiento</th>
+						<td>${patient.procedure}</td>
+					  </tr>
+					  <tr>
+						<th>Diagnóstico</th>
+						<td>${patient.hasMalaria}</td>
+					  </tr>
+					  <tr>
+						<th>Tipo de Parásito</th>
+						<td>${patient.parasiteType}</td>
+					  </tr>
+					  <tr>
+						<th>Tratamiento</th>
+						<td>${patient.treatment}</td>
+					  </tr>
+					</table>
+				  `;
+				}
+			  function handleSearch() {
+				const searchTerm = searchInput.value.trim().toUpperCase();
+				if (!searchTerm) {
+				  alert('Por favor ingrese un DNI');
+				  return;
+				}
+				const foundPatient = patientsData.find(p => p.id === searchTerm);
+				if (foundPatient) {
+				  displayPatientData(foundPatient);
+				  searchResults.style.display = 'none';
+				} else {
+				  alert('No se encontró paciente con DNI: ' + searchTerm);
+				}
+			  }
+			  function showSuggestions() {
+				const searchTerm = searchInput.value.trim().toUpperCase();
+				searchResults.innerHTML = '';
+				if (searchTerm.length === 0) {
+				  searchResults.style.display = 'none';
+				  return;
+				}
+				const matches = patientsData.filter(p => p.id.includes(searchTerm)).slice(0, 5);
+				if (matches.length > 0) {
+				  matches.forEach(match => {
+					const div = document.createElement('div');
+					div.textContent = match.id;
+					div.addEventListener('click', () => {
+					  searchInput.value = match.id;
+					  displayPatientData(match);
+					  searchResults.style.display = 'none';
+					});
+					searchResults.appendChild(div);
+				  });
+				  searchResults.style.display = 'block';
+				} else {
+				  searchResults.style.display = 'none';
+				}
+			  }
+			  async function initApp() {
+				await loadPatientData();
+				searchBtn.addEventListener('click', handleSearch);
+				searchInput.addEventListener('keypress', (e) => {
+				  if (e.key === 'Enter') handleSearch();
+				});
+				searchInput.addEventListener('input', showSuggestions);
+				document.addEventListener('click', (e) => {
+				  if (e.target !== searchInput) {
+					searchResults.style.display = 'none';
+				  }
+				});
+			  }
+			  initApp();
+			});
+		</script>
+		<footer class="site-footer">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Contacto</h3>
+					<ul>
+						<li><i class="fas fa-envelope"></i> scan4@gmail.com</li>
+						<li><i class="fas fa-phone"></i> +34 121 212 121</li>
+						<li><i class="fas fa-map-marker-alt"></i> c/Matsaria, 32<br>20600 Eibar, Guipuzcoa, España</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Enlaces rápidos</h3>
+					<ul>
+						<li><a href="#scan4-section">Inicio</a></li>
+						<li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+						<li><a href="#Contacto">Contacto</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Legal</h3>
+					<ul>
+						<li><a>Política de privacidad</a></li>
+						<li><a>Términos de uso</a></li>
+						<li><a>Aviso legal</a></li>
+						<li><a>Cookies</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Síguenos</h3>
+					<div class="social-icons">
+						<a href="https://x.com/?lang=es"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin"></i></a>
+						<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+						<a href="https://www.youtube.com/?app=desktop&hl=es"><i class="fab fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<p>© 2025 SCAN4 | Todos los derechos reservados</p>
+			</div>
+		</footer>
+	</body> 
+</html>
