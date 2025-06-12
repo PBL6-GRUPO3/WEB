@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>NORMATIVA SANITARIA</title>
+		<link rel="stylesheet" href="Etiqueta.css">	
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar">
+			<a href="HTML_pbl6.html#" class="logo-link">
+				<img class="brand" src="Imagenes/LogoSCAN4.png" alt="Logo SCAN4" />
+			</a>
+			<a class="navbar_item" href="HTML_pbl6.html#scan4-section">Inicio</a>
+            <a class="navbar_item" href="HTML_pbl6.html#sobre-nosotros">Sobre nosotros</a>
+            <a class="navbar_item" href="HTML_pbl6.html#Contacto">Contacto</a>
+			<div class="navbar_item dropdown navbar_item-push-right">
+				<span class="dropbtn">Usuario</span>
+				<div class="dropdown-content">
+					<a href="iniciarsesion.html">Iniciar sesión</a>
+				</div>
+			</div>
+        </nav>
+		<main class="seccion-normativa">
+			<h1 class="seccion-titulo">Normativa Sanitaria</h1>
+			<div class="contenedor-descargas">
+				<div class="tarjeta-descarga">
+					<h2>Etiqueta</h2>
+					<a href="Imagenes/Etiqueta.png" class="enlace-sin-estilo" target="_blank">
+						<img src="Imagenes/Etiqueta.png" alt="Etiqueta Sanitaria" style="height:150px; margin:15px 0;"/>
+					</a>
+					<p class="descripcion-descarga">Haz clic en la imagen para ver la etiqueta</p>
+				</div>
+				<div class="tarjeta-descarga">
+					<h2>Instrucciones</h2>
+					<a href="Archivos/Instrucciones_Grupo3.pdf" class="enlace-sin-estilo" target="_blank">
+						<i class="fas fa-file-pdf" style="font-size: 100px; color: #e74c3c; margin:15px 0;"></i>
+					</a>
+					<p class="descripcion-descarga">Haz clic para descargar las instrucciones en PDF</p>
+				</div>
+			</div>
+		</main>
+		<footer class="site-footer">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Contacto</h3>
+					<ul>
+						<li><i class="fas fa-envelope"></i> scan4@gmail.com</li>
+						<li><i class="fas fa-phone"></i> +34 121 212 121</li>
+						<li><i class="fas fa-map-marker-alt"></i> c/Matsaria, 32<br>20600 Eibar, Guipuzcoa, España</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Enlaces rápidos</h3>
+					<ul>
+						<li><a href="#scan4-section">Inicio</a></li>
+						<li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+						<li><a href="#Contacto">Contacto</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Legal</h3>
+					<ul>
+						<li><a>Política de privacidad</a></li>
+						<li><a>Términos de uso</a></li>
+						<li><a>Aviso legal</a></li>
+						<li><a>Cookies</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Síguenos</h3>
+					<div class="social-icons">
+						<a href="https://x.com/?lang=es"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin"></i></a>
+						<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+						<a href="https://www.youtube.com/?app=desktop&hl=es"><i class="fab fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<p>© 2025 SCAN4 | Todos los derechos reservados</p>
+			</div>
+		</footer>
+		<button id="scrollTopBtn" title="Ir arriba">&#8679;</button>
+		<script>
+		  const scrollBtn = document.getElementById('scrollTopBtn');
+		  scrollBtn.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		  });
+		</script>
+	</body> 
+</html>
