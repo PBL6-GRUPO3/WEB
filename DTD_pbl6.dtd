@@ -1,0 +1,30 @@
+<!ELEMENT PBL (Patients, Professionals)>
+
+<!ELEMENT Patients (Patient+)>
+<!ELEMENT Patient (InformaciónPaciente, DatosPrueba, Imagen, ResultadosPrueba)>
+<!ATTLIST Patient idPa CDATA #REQUIRED>
+
+<!ELEMENT InformaciónPaciente (NamePa, PasswordPa, Age, Height, Weight)>
+<!ELEMENT NamePa (#PCDATA)>
+<!ELEMENT PasswordPa (#PCDATA)>
+<!ELEMENT Age (#PCDATA)>
+<!ELEMENT Height (#PCDATA)>
+<!ELEMENT Weight (#PCDATA)>
+<!ELEMENT DatosPrueba (TestDate, ReportDate)>
+<!ELEMENT TestDate (#PCDATA)>
+<!ELEMENT ReportDate (#PCDATA)>
+<!ELEMENT Imagen (#PCDATA)>
+<!ELEMENT ResultadosPrueba (Procedure, Diagnosis+)>
+<!ELEMENT Procedure (#PCDATA)>
+<!ELEMENT Diagnosis (HasMalaria, ParasiteType, Treatment)>
+<!ELEMENT HasMalaria (#PCDATA)>
+<!ELEMENT ParasiteType (#PCDATA)>
+<!ELEMENT Treatment (#PCDATA)>
+
+<!ELEMENT Professionals (Professional+)>
+<!ELEMENT Professional (InformaciónProfesional+)>
+<!ATTLIST Professional idPr CDATA #REQUIRED>
+<!ELEMENT InformaciónProfesional (NamePr, PasswordPr, Specialty)>
+<!ELEMENT NamePr (#PCDATA)>
+<!ELEMENT PasswordPr (#PCDATA)>
+<!ELEMENT Specialty (#PCDATA)>
