@@ -2,17 +2,6 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:template match="/">
 		<html>
-			<head>
-				<title>Resultados PBL</title>
-				<style>
-				body { font-family: Arial; padding: 20px; background: #f2f2f2; }
-				h1, h2 { color: #2c3e50; }
-				table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
-				th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-				th { background: #2c3e50; color: #fff; }
-				img { max-width: 300px; margin-top: 10px; border: 1px solid #ccc; }
-				</style>
-			</head>
 			<body>
 				<h1>Pacientes</h1>
 				<xsl:for-each select="PBL/Patients/Patient">
