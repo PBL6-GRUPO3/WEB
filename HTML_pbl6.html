@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>SCAN4MALARIA</title>
+		<link rel="stylesheet" href="CSS_pbl6.css">	
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+	</head>
+	<body>
+		<nav class="navbar">
+			<a href="#" class="logo-link">
+				<img class="brand" src="Imagenes/LogoSCAN4.png" alt="Logo SCAN4" />
+			</a>
+			<a class="navbar_item" href="#scan4-section">Inicio</a>
+            <a class="navbar_item" href="#sobre-nosotros">Sobre nosotros</a>
+            <a class="navbar_item" href="#Contacto">Contacto</a>
+			<div class="navbar_item dropdown navbar_item-push-right">
+				<span class="dropbtn">Usuario</span>
+				<div class="dropdown-content">
+					<a href="iniciarsesion.html">Iniciar sesión</a>
+				</div>
+			</div>
+        </nav>
+		<div id="Inicio" class="main">
+			<video autoplay muted loop>
+				<source src="video/SCAN4.mp4" type="video/mp4">
+				Tu navegador no soporta la reproducción de video.
+			</video>
+		</div>
+		<div class="center-button">
+			<a href="#scan4-section" class="scan-button">MÁS INFORMACIÓN <i class="fas fa-arrow-down"></i>
+			</a>
+		</div>
+		<section id="scan4-section" class="section-scan4">
+		  <div class="scan4-box">
+			<h2>SCAN4</h2>
+			<p>
+			  Scan4 es una startup que ofrece herramientas de diagnóstico accesibles y automatizadas, basadas en inteligencia artificial, para la detección temprana de diversas enfermedades.
+			</p>
+			<a href="scan4producto.html" class="producto-button">Producto</a>
+		  </div>
+		</section>
+		<section id="sobre-nosotros" class="sobre-nosotros">
+			<h2>¿Quiénes somos?</h2>
+			<p class="sobre-texto">
+			Somos un equipo multidisciplinario comprometido con la innovación tecnológica en el diagnóstico de enfermedades a través de inteligencia artificial.
+			</p>
+			<div class="carousel-container">
+				<div class="carousel" id="carousel">
+					<div class="persona-card">
+						<img src="imagenes/Persona1.jpg" alt="Persona 1" />
+						<h3>Maialen Lazkano</h3>
+						<p>Desarrolladora de la web y diseño de interfaz</p>
+					</div>
+					<div class="persona-card">
+						<img src="imagenes/Persona2.jpg" alt="Persona 2" />
+						<h3>Maren Ona</h3>
+						<p>Analista de datos y ingeniera de inteligencia artificial</p>
+					</div>
+					<div class="persona-card">
+						<img src="imagenes/Persona3.jpg" alt="Persona 3" />
+						<h3>Unai Perez</h3>
+						<p>Analista de datos y responsable de evaluación económica</p>
+					</div>
+					<div class="persona-card">
+						<img src="imagenes/Persona4.jpg" alt="Persona 4" />
+						<h3>Leire Treviño</h3>
+						<p>Coordinadora de proyecto y responsable del cumplimiento legal</p>
+					</div>
+					<div class="persona-card">
+						<img src="imagenes/Persona5.jpg" alt="Persona 5" />
+						<h3>Julen Uchuari</h3>
+						<p>Ingeniero de inteligencia artificial y procesamiento de datos</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="Contacto" class="contact-section">
+			<h2>Contacto</h2>
+			<p>¿Tienes preguntas, sugerencias o quieres colaborar con nosotros? ¡Escríbenos!</p>
+			<form class="contact-form" action="https://formspree.io/f/manokger" method="post">
+			<div class="form-group">
+				<label for="name">Nombre</label>
+				<input type="text" id="name" name="name" required placeholder="Tu nombre">
+			</div>
+			<div class="form-group">
+				<label for="email">Correo electrónico</label>
+				<input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com">
+			</div>
+			<div class="form-group">
+				<label for="message">Mensaje</label>
+				<textarea id="message" name="message" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+			</div>
+			<button type="submit" class="submit-button">Enviar</button>
+			</form>
+		</section>
+		<footer class="site-footer">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Contacto</h3>
+					<ul>
+						<li><i class="fas fa-envelope"></i> scan4@gmail.com</li>
+						<li><i class="fas fa-phone"></i> +34 121 212 121</li>
+						<li><i class="fas fa-map-marker-alt"></i> c/Matsaria, 32<br>20600 Eibar, Guipuzcoa, España</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Enlaces rápidos</h3>
+					<ul>
+						<li><a href="#scan4-section">Inicio</a></li>
+						<li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+						<li><a href="#Contacto">Contacto</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Legal</h3>
+					<ul>
+						<li><a>Política de privacidad</a></li>
+						<li><a>Términos de uso</a></li>
+						<li><a>Aviso legal</a></li>
+						<li><a>Cookies</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Síguenos</h3>
+					<div class="social-icons">
+						<a href="https://x.com/?lang=es"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin"></i></a>
+						<a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+						<a href="https://www.youtube.com/?app=desktop&hl=es"><i class="fab fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<p>© 2025 SCAN4 | Todos los derechos reservados</p>
+			</div>
+		</footer>
+		<button id="scrollTopBtn" title="Ir arriba">
+		  &#8679;
+		</button>
+		<script>
+		  const scrollBtn = document.getElementById('scrollTopBtn');
+
+		  scrollBtn.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		  });
+		</script>
+	</body> 
+</html>
+
+    
