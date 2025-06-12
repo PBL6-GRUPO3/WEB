@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="XSLT_pbl6.xslt"?>
+<!--<PBL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD_pbl6.xsd">-->
+<!--<!DOCTYPE PBL SYSTEM "DTD_pbl6.dtd">-->
+<PBL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD_pbl6.xsd">
+	<Patients>
+        <Patient idPa="72854936K">
+			<InformaciónPaciente>
+				<NamePa>Ibai Lazkano</NamePa>
+				<PasswordPa>ibai123</PasswordPa>
+				<Age>21</Age>
+				<Height>178</Height>
+				<Weight>56</Weight>
+			</InformaciónPaciente>
+			<DatosPrueba>
+				<TestDate>2025-06-01</TestDate>
+				<ReportDate>2025-06-02</ReportDate>
+			</DatosPrueba>
+			<Imagen>Imagenes/PF.jpg</Imagen>
+			<ResultadosPrueba>
+				<Procedure>Análisis de muestra de sangre para la detección de Malaria</Procedure>
+				<Diagnosis>
+					<HasMalaria>Malaria</HasMalaria>
+					<ParasiteType>Plasmodium Falciparum</ParasiteType>
+					<Treatment>Tratamiento disponibles para la especie de Plasmodium Falciparum: Artermeter-lumefantrina (ACT), Quinina y Artesanuto</Treatment>
+				</Diagnosis>
+			</ResultadosPrueba>
+        </Patient>
+		<Patient idPa="58029784W">
+			<InformaciónPaciente>
+				<NamePa>Izaro Serrano</NamePa>
+				<PasswordPa>izaro123</PasswordPa>
+				<Age>35</Age>
+				<Height>165</Height>
+				<Weight>68</Weight>
+			</InformaciónPaciente>
+			<DatosPrueba>
+				<TestDate>2025-03-25</TestDate>
+				<ReportDate>2025-03-28</ReportDate>
+			</DatosPrueba>
+			<Imagen>Imagenes/Uninfected.jpg</Imagen>
+			<ResultadosPrueba>
+				<Procedure>Análisis de muestra de sangre para la detección de Malaria</Procedure>
+				<Diagnosis>
+					<HasMalaria>No malaria</HasMalaria>
+					<ParasiteType>-</ParasiteType>
+					<Treatment>-</Treatment>
+				</Diagnosis>
+			</ResultadosPrueba>
+        </Patient>
+		<Patient idPa="58029736J">
+			<InformaciónPaciente>
+				<NamePa>Unai Perez</NamePa>
+				<PasswordPa>unai123</PasswordPa>
+				<Age>20</Age>
+				<Height>175</Height>
+				<Weight>65</Weight>
+			</InformaciónPaciente>
+			<DatosPrueba>
+				<TestDate>2025-01-22</TestDate>
+				<ReportDate>2025-01-30</ReportDate>
+			</DatosPrueba>
+			<Imagen>Imagenes/PV.jpg</Imagen>
+			<ResultadosPrueba>
+				<Procedure>Análisis de muestra de sangre para la detección de Malaria</Procedure>
+				<Diagnosis>
+					<HasMalaria>Malaria</HasMalaria>
+					<ParasiteType>Plasmodium Vivax</ParasiteType>
+					<Treatment>Tratamiento disponibles para la especie de Plasmodium Vivax: Cloroquina, Primaquina y Tafenoquina</Treatment>
+				</Diagnosis>
+			</ResultadosPrueba>
+        </Patient>
+    </Patients>
+    <Professionals>
+        <Professional idPr="72854934L">
+			<InformaciónProfesional>
+				<NamePr>Maialen Lazkano</NamePr>
+				<PasswordPr>maialen123</PasswordPr>
+				<Specialty>Cardiology</Specialty>
+			</InformaciónProfesional>
+        </Professional>
+        <Professional idPr="77889900F">
+			<InformaciónProfesional>
+				<NamePr>Leire Treviño</NamePr>
+				<PasswordPr>leire123</PasswordPr>
+				<Specialty>Dermatology</Specialty>
+			</InformaciónProfesional>
+        </Professional>
+    </Professionals>
+</PBL>
